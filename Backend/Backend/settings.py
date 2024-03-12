@@ -21,9 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-iscfygrdj%tztr0lf1i6xwi$!oyg9zkx0l82@c864$ujakm&+#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','project.vickytajpuriya.com',"www.project.vickytajpuriya.com"]
 
 
 # Application definition
@@ -197,3 +197,12 @@ PASSWORD_RESET_TIMEOUT=300          # 300 Sec = 5 Min
 #  ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+#HTTPS settings
+SESSION_COOKIE_SECURE =True
+CSRF_COOKIE_SECURE=True
+SECURE_SSL_REDIRECT =True
+
+SECURE_HSTS_SECONDS = 3153600
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True

@@ -10,7 +10,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
   password2 = serializers.CharField(style={'input_type':'password'}, write_only=True)
   class Meta:
     model = User
-    fields=['email', 'name', 'phone' , 'password', 'password2', 'tc']
+    fields=['email', 'name' , 'password', 'password2', 'tc']
     extra_kwargs={
       'password':{'write_only':True}
     }
@@ -30,15 +30,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         """
         if User.objects.filter(email=value).exists():
             raise serializers.ValidationError("This email address is already in use.")
-        return value
-  
-  #Phone Number validator
-  def validate_phone(self, value):
-        """
-        Validate that the phone number is not already in use.
-        """
-        if User.objects.filter(phone=value).exists():
-            raise serializers.ValidationError("This phone number is already in use.")
         return value
    
 
@@ -86,7 +77,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'name', 'tc', 'phone', 'userinfo', 'courseinfo', 'projects')
+        fields = ('id', 'email', 'name', 'tc', 'userinfo', 'courseinfo', 'projects')
     
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -123,7 +114,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
         instance.email = validated_data.get('email', instance.email)
         instance.name = validated_data.get('name', instance.name)
         instance.tc = validated_data.get('tc', instance.tc)
-        instance.phone = validated_data.get('phone', instance.phone)
         instance.save()
 
         userinfo_data = validated_data.get('userinfo', {})

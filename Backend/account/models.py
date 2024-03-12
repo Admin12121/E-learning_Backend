@@ -5,7 +5,7 @@ from api.product.models import Courses
 
 #  Custom User Manager
 class UserManager(BaseUserManager):
-  def create_user(self, email, name,phone, tc, password=None, password2=None):
+  def create_user(self, email, name, tc, password=None, password2=None):
       """
       Creates and saves a User with the given email, name, tc and password.
       """
@@ -15,7 +15,6 @@ class UserManager(BaseUserManager):
       user = self.model(
           email=self.normalize_email(email),
           name=name,
-          phone=phone,
           tc=tc,
       )
 
@@ -23,7 +22,7 @@ class UserManager(BaseUserManager):
       user.save(using=self._db)
       return user
 
-  def create_superuser(self, email, name,phone, tc, password=None):
+  def create_superuser(self, email, name, tc, password=None):
       """
       Creates and saves a superuser with the given email, name, tc and password.
       """
@@ -31,7 +30,6 @@ class UserManager(BaseUserManager):
           email,
           password=password,
           name=name,
-          phone=phone,
           tc=tc,
       )
       user.is_admin = True
@@ -55,17 +53,11 @@ class User(AbstractBaseUser):
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
   last_login = models.DateTimeField(blank=True, null=True)
-  phone = models.IntegerField(        validators=[
-            MaxValueValidator(9999999999),
-            MinValueValidator(1000000000)
-        ],
-        default= 1000000000
-        )
 
   objects = UserManager()
 
   USERNAME_FIELD = 'email'
-  REQUIRED_FIELDS = ['name', 'phone' ,'tc']
+  REQUIRED_FIELDS = ['name','tc']
 
   def __str__(self):
       return self.email
