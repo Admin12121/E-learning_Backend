@@ -19,4 +19,4 @@ jobs:
         server: ${{ secrets.GIT_CPANEL_Test_SERVER }}
         username: ${{ secrets.GIT_CPANEL_Test_USER }}
         password: ${{ secrets.GIT_CPANEL_Test_PWD }}
-        local-dir: ./Backend/
+        local-dir: ./Learner_backend/
