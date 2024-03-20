@@ -61,7 +61,7 @@ class ProjectsSerializer(serializers.ModelSerializer):
 
    def get_username(self, obj):
         # Access the user object associated with the project and retrieve its username
-        return obj.user.username
+        return obj.user.name
 
    class Meta:
       model = Projects
