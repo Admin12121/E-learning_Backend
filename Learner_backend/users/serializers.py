@@ -57,9 +57,15 @@ class UserInfoSerializer(serializers.ModelSerializer):
         fields = ['user', 'profile', 'bio', 'address', 'portfolio']
 
 class ProjectsSerializer(serializers.ModelSerializer):
+   username = serializers.SerializerMethodField()
+
+   def get_username(self, obj):
+        # Access the user object associated with the project and retrieve its username
+        return obj.user.username
+
    class Meta:
       model = Projects
-      fields = ['id','user','project_title','project_type','description','html_code','css_code','js_code']
+      fields = ['id','username','project_title','project_type','description','html_code','css_code','js_code']
 
 class UserProfileSerializer(serializers.ModelSerializer):
     userinfo = UserInfoSerializer()
