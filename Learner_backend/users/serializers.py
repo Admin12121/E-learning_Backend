@@ -61,11 +61,11 @@ class ProjectsSerializer(serializers.ModelSerializer):
 
    def get_username(self, obj):
         # Access the user object associated with the project and retrieve its username
-        return obj.user.name
+        return obj.user.name if obj.user else None
 
    class Meta:
       model = Projects
-      fields = ['id','username','project_title','project_type','description','html_code','css_code','js_code']
+      fields = ['id','user','username','project_title','project_type','description','html_code','css_code','js_code']
 
 class UserProfileSerializer(serializers.ModelSerializer):
     userinfo = UserInfoSerializer()
